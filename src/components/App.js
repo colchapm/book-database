@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import DoneReadList from './DoneReadList';
+import BookControl from "./BookControl"
 
 function App() {
   return (
   <React.Fragment>
     <Header />
-    <DoneReadList />
+    <BookControl />
   </React.Fragment>
   );
 }

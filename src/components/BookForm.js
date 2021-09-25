@@ -1,10 +1,11 @@
 import React from 'react';
 
-function BookForm() {
+function BookForm(props) {
 
   function submitSearch(event) {
     event.preventDefault();
     const searchTitle = event.target.title.value;
+    props.onTitleSearch(searchTitle);
   }
   return (
     <React.Fragment>

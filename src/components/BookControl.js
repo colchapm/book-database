@@ -7,7 +7,7 @@ class BookControl extends React.Component {
       this.state = {
         error: null,
         isApiLoaded: false,
-        bookData: {},
+        bookData: [],
         title: null
       };
   }
@@ -15,13 +15,14 @@ class BookControl extends React.Component {
 
 
   makeGoogleApiCall = (title) => {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${REACT_APP_GOOGLE_BOOKS_API_KEY}`)
+    console.log('makeapicall reached');
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.REACT_APP_GOOGLE_BOOKS_API_KEY}`)
     .then(response => response.json())
       .then(
         (jsonifiedResponse) => {
           this.setState({
             isApiLoaded: true,
-            bookData: jsonifiedResponse
+            bookData: jsonifiedResponse.items
           });
         })
         .catch((error) => {
@@ -32,24 +33,41 @@ class BookControl extends React.Component {
         })
   }
 
-  
+  handleSearch = (title) => {
+    console.log('handle search reached');
+    console.log(title);
+    this.setState({ title });
+    this.makeGoogleApiCall(title);
+  }
 
 
   render() {
-    if (this.state.title != null && this.state.isApiLoaded) {
+    const { error, isApiLoaded, bookData, title } = this.state;
+    let results = null;
+    
+
+    console.log("book data is: " + bookData); 
+    // console.log("this.props is : " + this.props);
+    if (title != null && isApiLoaded) {
       results = 
       <React.Fragment>
         <h1>Search Results</h1>
         <ul>
-          {this.state.bookData.map((book, index) =>
+          {bookData.map((bookData, index) =>
             <li key={index}>
-              <p>{book.items[index].volumeInfo.title}</p>
-              <p>{book.items[index].volumeInfo.author}</p>
+              <p>{bookData.volumeInfo.title}</p>
+              <p>{bookData.volumeInfo.authors}</p>
             </li>
           )}
         </ul>
       </React.Fragment>
     }
+      return (
+        <React.Fragment>
+          <BookForm onTitleSearch={this.handleSearch} />
+          {results}
+        </React.Fragment>
+      )
 
   }
 
