@@ -1,6 +1,7 @@
 import React from 'react';
 import BookSearchForm from './BookSearchForm';
 import SearchResultList from './SearchResultList';
+import SavedList from './SavedList';
 
 class BookControl extends React.Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class BookControl extends React.Component {
         isApiLoaded: false,
         bookData: [],
         savedBooks: [],
-        selectedBook: null,
         title: null
       }
   }
@@ -45,20 +45,24 @@ class BookControl extends React.Component {
     console.log(book);
     const newSavedBooksCollection = this.state.savedBooks.concat(book);
     this.setState({savedBooks: newSavedBooksCollection});
-    console.log(this.state.savedBooks);
-    console.log(this.state);
   }
 
 
   render() {
     console.log(this.state)
-    const { error, isApiLoaded, bookData, title } = this.state;
+    const { error, isApiLoaded, title, savedBooks } = this.state;
     let results = null;
 
     if (title!= null && isApiLoaded) {
       results = <SearchResultList searchResultList={this.state.bookData}
                                   onSavingBook = {this.handleSavingBook}/>
     }
+
+    // if (savedBooks.length !== 0) {
+    //   results = <SavedList savedReadList={this.state.savedBooks}/>
+    // }
+
+
     
       return (
         <React.Fragment>

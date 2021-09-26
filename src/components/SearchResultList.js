@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 
 function SearchResultList(props){
 
   function handleSavingBook(book) {
-    // book.preventDefault();
     console.log(book);
     console.log('handle saving book function reached')
-    // console.log(event.target)
-    // props.onSavingBook({title: event.target.bookData.volumeInfo.title, id: v4()});
     props.onSavingBook(book);
 
   }
