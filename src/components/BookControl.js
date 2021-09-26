@@ -13,9 +13,7 @@ class BookControl extends React.Component {
   }
 
 
-
   makeGoogleApiCall = (title) => {
-    console.log('makeapicall reached');
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.REACT_APP_GOOGLE_BOOKS_API_KEY}`)
     .then(response => response.json())
       .then(
@@ -34,7 +32,6 @@ class BookControl extends React.Component {
   }
 
   handleSearch = (title) => {
-    console.log('handle search reached');
     console.log(title);
     this.setState({ title });
     this.makeGoogleApiCall(title);
@@ -45,9 +42,6 @@ class BookControl extends React.Component {
     const { error, isApiLoaded, bookData, title } = this.state;
     let results = null;
     
-
-    console.log("book data is: " + bookData); 
-    // console.log("this.props is : " + this.props);
     if (title != null && isApiLoaded) {
       results = 
       <React.Fragment>
@@ -68,10 +62,7 @@ class BookControl extends React.Component {
           {results}
         </React.Fragment>
       )
-
-  }
-
-  
+  }  
 }
 
 
