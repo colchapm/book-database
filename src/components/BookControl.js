@@ -1,5 +1,5 @@
 import React from 'react';
-import BookForm from './BookForm';
+import BookSearchForm from './BookSearchForm';
 
 class BookControl extends React.Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class BookControl extends React.Component {
           {bookData.map((bookData, index) =>
             <li key={index}>
               <p>{bookData.volumeInfo.title}</p>
-              <p>{bookData.volumeInfo.authors}</p>
+              <p>Author(s): {bookData.volumeInfo.authors}</p>
             </li>
           )}
         </ul>
@@ -58,7 +58,7 @@ class BookControl extends React.Component {
     }
       return (
         <React.Fragment>
-          <BookForm onTitleSearch={this.handleSearch} />
+          <BookSearchForm onTitleSearch={this.handleSearch} />
           {results}
         </React.Fragment>
       )
