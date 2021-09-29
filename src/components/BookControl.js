@@ -1,7 +1,6 @@
 import React from 'react';
 import BookSearchForm from './BookSearchForm';
 import SearchResultList from './SearchResultList';
-import SavedList from './SavedList';
 
 class BookControl extends React.Component {
   constructor(props) {
@@ -40,12 +39,13 @@ class BookControl extends React.Component {
     this.makeGoogleApiCall(title);
   }
 
-  handleSavingBook = (book) => {
-    console.log("handlesaving controller book function reached");
-    console.log(book);
-    const newSavedBooksCollection = this.state.savedBooks.concat(book);
-    this.setState({savedBooks: newSavedBooksCollection});
-  }
+  // handleSavingBook = (book) => {
+  //   console.log("handlesaving controller book function reached");
+  //   console.log(book);
+  //   const newSavedBooksCollection = this.state.savedBooks.concat(book);
+  //   this.setState({savedBooks: newSavedBooksCollection});
+  //   //this is where i would add book to firestore "saved" collection
+  // }
 
 
   render() {
@@ -55,12 +55,8 @@ class BookControl extends React.Component {
 
     if (title!= null && isApiLoaded) {
       results = <SearchResultList searchResultList={this.state.bookData}
-                                  onSavingBook = {this.handleSavingBook}/>
+                                  onSavingBook = {this.props.onClickSaved}/>
     }
-
-    // if (savedBooks.length !== 0) {
-    //   results = <SavedList savedReadList={this.state.savedBooks}/>
-    // }
 
 
     
