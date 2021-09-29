@@ -24,7 +24,7 @@ function SearchResultList(props){
           
             <img src={bookData.volumeInfo.imageLinks === undefined
               ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
-              : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover picture"/>
+              : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
             <button onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
             { console.log(bookData.id) }
