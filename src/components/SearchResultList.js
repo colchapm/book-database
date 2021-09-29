@@ -17,6 +17,15 @@ function SearchResultList(props){
           <li key={index}>
             <p>{bookData.volumeInfo.title}</p>
             <p>Author(s): {bookData.volumeInfo.authors}</p>
+            <p>Genre: {bookData.volumeInfo.categories}</p>
+            <p>Average Rating: {bookData.volumeInfo.averageRating === undefined
+              ? "No Ratings Available"
+              : bookData.volumeInfo.averageRating} </p>
+          
+            <img src={bookData.volumeInfo.imageLinks === undefined
+              ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
+              : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover picture"/>
+
             <button onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
             { console.log(bookData.id) }
           </li>
