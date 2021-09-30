@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import BookControl from "./BookControl";
 import SavedList from "./SavedList";
+import DoneReadList from "./DoneReadList";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -46,11 +47,17 @@ function App() {
         <Route path="/saved">
           <SavedList savedBooks={savedBooks} />
         </Route>
+      </Switch>
+      <Switch>
         <Route path="/">
-          <BookControl onClickSaved={handleClickSaved} />
+          <BookControl onClickSaved={handleClickSaved}
+                      onClickRead={handleClickRead} />
         </Route>
-        <Route path="/readlist">
-          <DoneReadList onClickRead={handleClickRead}/>
+      </Switch>
+      <Switch>
+        <Route path="/history">
+          <DoneReadList completedBooks={completedBooks}
+                        onClickRead={handleClickRead}/>
         </Route>
       </Switch>
     </Router>
