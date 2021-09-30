@@ -10,6 +10,10 @@ function SavedList(props) {
     props.onClickRead(book);
   }
 
+  function handleRemovingSave(book) {
+    props.onClickRemoveFromSaved(book);
+  }
+
 
   return (
     <>
@@ -29,6 +33,7 @@ function SavedList(props) {
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
             <button onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
+            <button onClick= { () => handleRemovingSave(bookData) }>Remove From Readlist</button>
             { console.log(bookData.id) }
           </li>
         )}

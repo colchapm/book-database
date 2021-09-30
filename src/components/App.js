@@ -40,13 +40,23 @@ function App() {
     //this is where i would add a read book to firestore "completed" collection
   }
 
+  const handleClickRemoveFromSaved = (id) => {
+    console.log("handle click remove saved book from App reached");
+    console.log(id);
+    const newSavedBooksCollection = savedBooks.filter(book => book.id !== id);
+    setSavedBooks(newSavedBooksCollection);
+    console.log(newSavedBooksCollection);
+    //this is where i would remove a read book from firestore "saved" collection
+  }
+
   return (
     <Router>
       <Header />
       <Switch>
         <Route path="/saved">
           <SavedList savedBooks={savedBooks}
-                      onClickRead={handleClickRead} />
+                      onClickRead={handleClickRead} 
+                      onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
         </Route>
         <Route path="/history">
           <DoneReadList completedBooks={completedBooks} />
