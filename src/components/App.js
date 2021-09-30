@@ -13,6 +13,7 @@ function App() {
   //setSavedBooks is a function that updates our current state (savedBooks). equivalent to setState that gets used in class component
   //App component will re-render whenever setSavedBooks is called
 
+  const [completedBooks, setCompletedBooks] = useState([]);
 
   useEffect(() => {
     //the function inside here will be called on at the end of each lifecycle (this is where i will get collection from firestore) and then call setSavedBooks and pass in the result (setSavedBooks will set the value of savedBooks)
@@ -29,6 +30,15 @@ function App() {
     //this is where i would add saved book to firestore "saved" collection
   }
 
+  const handleClickRead = (book) => {
+    console.log("handle click as read from App reached");
+    console.log(book);
+    const newCompletedBooksCollection = completedBooks.concat(book);
+    setCompletedBooks(newCompletedBooksCollection);
+    console.log(newCompletedBooksCollection);
+    //this is where i would add a read book to firestore "completed" collection
+  }
+
   return (
     <Router>
       <Header />
@@ -38,6 +48,9 @@ function App() {
         </Route>
         <Route path="/">
           <BookControl onClickSaved={handleClickSaved} />
+        </Route>
+        <Route path="/readlist">
+          <DoneReadList onClickRead={handleClickRead}/>
         </Route>
       </Switch>
     </Router>
