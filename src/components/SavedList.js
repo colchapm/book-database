@@ -2,6 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function SavedList(props) {
+
+
+  function handleMarkingRead(book) {
+    console.log("savedList handleMarkingRead function reached");
+    console.log(book);
+    props.onClickRead(book);
+  }
+
+
   return (
     <>
     <h1>Saved Books</h1>
@@ -19,7 +28,7 @@ function SavedList(props) {
               ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
-            {/* <button onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button> */}
+            <button onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
             { console.log(bookData.id) }
           </li>
         )}
@@ -29,7 +38,7 @@ function SavedList(props) {
 }
 
 SavedList.propTypes = {
-  savedReadList: PropTypes.array,
+  onClickRead: PropTypes.func,
 }
 
 export default SavedList;

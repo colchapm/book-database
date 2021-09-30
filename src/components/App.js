@@ -45,19 +45,14 @@ function App() {
       <Header />
       <Switch>
         <Route path="/saved">
-          <SavedList savedBooks={savedBooks} />
-        </Route>
-      </Switch>
-      <Switch>
-        <Route path="/">
-          <BookControl onClickSaved={handleClickSaved}
+          <SavedList savedBooks={savedBooks}
                       onClickRead={handleClickRead} />
         </Route>
-      </Switch>
-      <Switch>
         <Route path="/history">
-          <DoneReadList completedBooks={completedBooks}
-                        onClickRead={handleClickRead}/>
+          <DoneReadList completedBooks={completedBooks} />
+        </Route>
+        <Route path="/">
+          <BookControl onClickSaved={handleClickSaved} />
         </Route>
       </Switch>
     </Router>

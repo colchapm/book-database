@@ -12,6 +12,9 @@ function Header(){
         <li>
           <Link to="/saved">Saved</Link>
         </li>
+        <li>
+          <Link to="/history">History</Link>
+        </li>
       </ul>
     </React.Fragment>
   );
