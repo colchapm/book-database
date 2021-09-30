@@ -7,7 +7,10 @@ function SearchResultList(props){
     console.log(book);
     console.log('handle saving book function reached')
     props.onSavingBook(book);
+  }
 
+  function handleMarkingRead(book){
+    props.onMarkingBookAsRead(book);
   }
   return (
     <React.Fragment>
@@ -27,6 +30,7 @@ function SearchResultList(props){
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
             <button onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
+            <button onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
             { console.log(bookData.id) }
           </li>
         )}
@@ -39,7 +43,8 @@ function SearchResultList(props){
 
   SearchResultList.propTypes = {
     searchResultList: PropTypes.array,
-    onSavingBook: PropTypes.func
+    onSavingBook: PropTypes.func,
+    onMarkingBookAsRead: PropTypes.func
   }
 
 export default SearchResultList;

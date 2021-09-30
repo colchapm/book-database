@@ -52,7 +52,8 @@ function App() {
           <DoneReadList completedBooks={completedBooks} />
         </Route>
         <Route path="/">
-          <BookControl onClickSaved={handleClickSaved} />
+          <BookControl onClickSaved={handleClickSaved}
+                        onClickRead={handleClickRead} />
         </Route>
       </Switch>
     </Router>

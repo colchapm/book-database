@@ -55,7 +55,8 @@ class BookControl extends React.Component {
 
     if (title!= null && isApiLoaded) {
       results = <SearchResultList searchResultList={this.state.bookData}
-                                  onSavingBook = {this.props.onClickSaved}/>
+                                  onSavingBook = {this.props.onClickSaved}
+                                  onMarkingBookAsRead={this.props.onClickRead}/>
     }
 
 
