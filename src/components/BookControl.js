@@ -9,7 +9,7 @@ class BookControl extends React.Component {
         error: null,
         isApiLoaded: false,
         bookData: [],
-        savedBooks: [],
+        // savedBooks: [],
         title: null
       }
   }
@@ -50,7 +50,7 @@ class BookControl extends React.Component {
 
   render() {
     console.log(this.state)
-    const { error, isApiLoaded, title, savedBooks } = this.state;
+    const { isApiLoaded, title } = this.state;
     let results = null;
 
     if (title!= null && isApiLoaded) {
