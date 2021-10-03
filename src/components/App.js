@@ -5,11 +5,16 @@ import SavedList from "./SavedList";
 import DoneReadList from "./DoneReadList";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'firebase/firestore';
-import { useFirestoreDocData, useFirestore } from 'reactfire';
+import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp } from 'reactfire';
+import { doc, getFirestore } from 'firebase/firestore';
+import BurritoTaste from "./BurritoTaste";
 
 
 function App() {
 
+  // const bookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
+  // const { status, data } = useFirestoreDocData(bookRef);
+  const firestore = getFirestore(useFirebaseApp());
   const [savedBooks, setSavedBooks] = useState([]);
   //useState is a hook that declares savedBooks as our state variable
   //useState has an argument of our initial state, in this case it is a blank array
@@ -31,7 +36,16 @@ function App() {
     const newSavedBooksCollection = savedBooks.concat(book);
     setSavedBooks(newSavedBooksCollection);
     console.log(newSavedBooksCollection);
+    console.log("click save and send to firestore")
+    // console.log(data);
+    // console.log(status);
     //this is where i would add saved book to firestore "saved" collection
+    // const savedBookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
+    // const { status, data } = useFirestoreDocData(savedBookRef);
+    // firestore.collection("testsavedbook").doc("testbook").set({
+    //   title: book.title,
+    //   author: book.author
+    // });
   }
 
   const handleClickRead = (book) => {
@@ -52,24 +66,28 @@ function App() {
     //this is where i would remove a read book from firestore "saved" collection
   }
 
+
   return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route path="/saved">
-          <SavedList savedBooks={savedBooks}
-                      onClickRead={handleClickRead} 
-                      onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
-        </Route>
-        <Route path="/history">
-          <DoneReadList completedBooks={completedBooks} />
-        </Route>
-        <Route path="/">
-          <BookControl onClickSaved={handleClickSaved}
-                        onClickRead={handleClickRead} />
-        </Route>
-      </Switch>
-    </Router>
+    <FirestoreProvider sdk={firestore}>
+    <BurritoTaste />
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/saved">
+            <SavedList savedBooks={savedBooks}
+                        onClickRead={handleClickRead} 
+                        onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
+          </Route>
+          <Route path="/history">
+            <DoneReadList completedBooks={completedBooks} />
+          </Route>
+          <Route path="/">
+            <BookControl onClickSaved={handleClickSaved}
+                          onClickRead={handleClickRead} />
+          </Route>
+        </Switch>
+      </Router>
+    </FirestoreProvider>
   );
 }
 

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { doc, getFirestore } from 'firebase/firestore';
 import { FirebaseAppProvider, FirestoreProvider, useFirestoreDocData, useFirestore, useFirebaseApp } from 'reactfire';
+import { doc, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,10 +17,11 @@ const firebaseConfig = {
 }
 
 
+
 ReactDOM.render(
   <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-    <App />
-  </FirebaseAppProvider>,
+      <App />
+    </FirebaseAppProvider>,
   document.getElementById('root')
 );
 
