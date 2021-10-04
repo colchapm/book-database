@@ -1,9 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useFirestore, useFirestoreDocData, useFirestoreCollection } from 'reactfire';
+import { doc, addDoc } from 'firebase/firestore';
+
 
 function SearchResultList(props){
+  // const savedBooksRef = useFirestore().collection("testsavedbook").doc("savedbook1");
+  // const savedBooksRef = useFirestore().collection("testsavedbook").doc("savedbook1");
+  // const savedBooksRef = doc(useFirestore(), "testsavedbook", "savedbook1");
+  // const savedBooksRef = await addDoc(collection(db, "testsavedbook"), {
+  //   title: "test test test"
+  // });
+  // const { data } = useFirestoreDocData(savedBooksRef);
+  // const { data } = useFirestoreCollection(savedBooksRef);
+  // const firestore = useFirestore();
+
+  // const savedBooksRef = useFirestore().collection("testsavedbook");
+  // const { data } = useFirestoreCollection(savedBooksRef);
 
   function handleSavingBook(book) {
+    
+    // return savedBooksRef.doc().set(book);
+      // savedbooks: firestore.FieldValue.arrayUnion(book);
+    //   savedbooks: "test test test"
+    // });
+    // console.log(data);
     console.log(book);
     console.log('handle saving book function reached')
     props.onSavingBook(book);

@@ -16,10 +16,8 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID 
 }
 
-
-
 ReactDOM.render(
-  <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <App />
     </FirebaseAppProvider>,
   document.getElementById('root')

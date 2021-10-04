@@ -1,13 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { doc, getFirestore } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import {
-  FirebaseAppProvider,
-  FirestoreProvider,
   useFirestoreDocData,
   useFirestore,
-  useFirebaseApp
 } from 'reactfire';
 
 

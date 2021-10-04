@@ -5,16 +5,20 @@ import SavedList from "./SavedList";
 import DoneReadList from "./DoneReadList";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'firebase/firestore';
-import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp } from 'reactfire';
-import { doc, getFirestore } from 'firebase/firestore';
+import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp, useFirestoreCollection } from 'reactfire';
+import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 import BurritoTaste from "./BurritoTaste";
 
 
 function App() {
 
+  // const savedBooksRef = useFirestore().collection("savedbooks");
+  // const { status, data } = useFirestoreCollection(savedBooksRef);
+
+  const firestore = getFirestore(useFirebaseApp());
   // const bookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
   // const { status, data } = useFirestoreDocData(bookRef);
-  const firestore = getFirestore(useFirebaseApp());
+
   const [savedBooks, setSavedBooks] = useState([]);
   //useState is a hook that declares savedBooks as our state variable
   //useState has an argument of our initial state, in this case it is a blank array
@@ -24,19 +28,40 @@ function App() {
 
   const [completedBooks, setCompletedBooks] = useState([]);
 
+  // const db = getFirestore();
+
+  function saveToDb(books) {
+    setDoc(doc(firestore, "testsavedbook", "savedbook1"), { savedBooks: books})
+      .then(() => console.log("success"))
+      .catch((err) => console.error(err));
+  }
+
   useEffect(() => {
     //the function inside here will be called on at the end of each lifecycle (this is where i will get collection from firestore) and then call setSavedBooks and pass in the result (setSavedBooks will set the value of savedBooks)
-    console.log("useEffect reached");
-  }, []) 
+    getDoc(doc(firestore, "testsavedbook", "savedbook1"))
+      .then((res) => {
+        if (res.exists()) {
+          setSavedBooks(res.data().savedBooks);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
   // second parameter of empty array means that this useEffect function will only be used one time, when the component mounts
 
   const handleClickSaved = (book) => {
     console.log("handle click saved from App reached");
     console.log(book);
+    // const savedBooks = [];
     const newSavedBooksCollection = savedBooks.concat(book);
+    // const newSavedBooksCollection = [...savedBooks, book]
     setSavedBooks(newSavedBooksCollection);
+    saveToDb(newSavedBooksCollection);
     console.log(newSavedBooksCollection);
     console.log("click save and send to firestore")
+    // savedBooksRef.doc().set({savedBooks})
+
+    // db.collection("testsavedbook").doc("savedbook1").update({savedbooks: newSavedBooksCollection});
+
     // console.log(data);
     // console.log(status);
     //this is where i would add saved book to firestore "saved" collection
@@ -69,7 +94,7 @@ function App() {
 
   return (
     <FirestoreProvider sdk={firestore}>
-    <BurritoTaste />
+      <BurritoTaste />
       <Router>
         <Header />
         <Switch>
