@@ -33,6 +33,13 @@ function App() {
       .catch((err) => console.error(err));
   }
 
+  function saveToCompletedDb(userId, books) {
+    console.log("saveToCompletdDb fnction reached");
+    setDoc(doc(firestore, "completedbooks", userId), { completedBooks: books})
+      .then(() => console.log("success"))
+      .catch((err) => console.error(err));
+  }
+
   const getSavedBooksFromDb = (userId) => {
     console.log("getSavedBooksFromDb function reached")
     console.log(userId);
@@ -40,6 +47,18 @@ function App() {
       .then((resource) => {
         if (resource.exists()) {
           setSavedBooks(resource.data().savedBooks);
+        }
+      })
+      .catch((error) => console.error(error));
+  }
+
+  const getCompletedBooksFromDb = (userId) => {
+    console.log("getCompletedBooksFromDb function reached")
+    console.log(userId);
+    getDoc(doc(firestore, "completedbooks", userId))
+      .then((resource) => {
+        if (resource.exists()) {
+          setCompletedBooks(resource.data().completedBooks);
         }
       })
       .catch((error) => console.error(error));
@@ -75,6 +94,7 @@ function App() {
     const newCompletedBooksCollection = completedBooks.concat(book);
     setCompletedBooks(newCompletedBooksCollection);
     console.log(newCompletedBooksCollection);
+    saveToCompletedDb(userId, newCompletedBooksCollection);
     //this is where i would add a read book to firestore "completed" collection
   }
 
@@ -91,6 +111,7 @@ function App() {
     console.log(user);
     setUserId(user.uid);
     getSavedBooksFromDb(user.uid);
+    getCompletedBooksFromDb(user.uid);
   }
 
   const handleLogOutSuccess = (user) => {
