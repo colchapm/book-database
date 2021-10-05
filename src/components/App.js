@@ -6,7 +6,7 @@ import DoneReadList from "./DoneReadList";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import 'firebase/firestore';
 import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp, useFirestoreCollection } from 'reactfire';
-import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc, getDoc, addDoc } from 'firebase/firestore';
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
@@ -14,12 +14,7 @@ import SignOut from "./SignOut";
 
 function App() {
 
-  // const savedBooksRef = useFirestore().collection("savedbooks");
-  // const { status, data } = useFirestoreCollection(savedBooksRef);
-
   const firestore = getFirestore(useFirebaseApp());
-  // const bookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
-  // const { status, data } = useFirestoreDocData(bookRef);
 
   const [savedBooks, setSavedBooks] = useState([]);
   //useState is a hook that declares savedBooks as our state variable
@@ -31,25 +26,36 @@ function App() {
   const [completedBooks, setCompletedBooks] = useState([]);
   const [userId, setUserId] = useState(null);
 
-  // const db = getFirestore();
-
-  function saveToSavedDb(books) {
-    setDoc(doc(firestore, "testsavedbook", "savedbook1"), { savedBooks: books})
+  function saveToSavedDb(userId, books) {
+    console.log("saveToSavedDb fnction reached");
+    setDoc(doc(firestore, "savedbooks", userId), { savedBooks: books})
       .then(() => console.log("success"))
       .catch((err) => console.error(err));
   }
 
-  useEffect(() => {
-    //the function inside here will be called on at the end of each lifecycle (this is where i will get collection from firestore) and then call setSavedBooks and pass in the result (setSavedBooks will set the value of savedBooks)
-    getDoc(doc(firestore, "testsavedbook", "savedbook1"))
-      .then((res) => {
-        if (res.exists()) {
-          setSavedBooks(res.data().savedBooks);
+  const getSavedBooksFromDb = (userId) => {
+    console.log("getSavedBooksFromDb function reached")
+    console.log(userId);
+    getDoc(doc(firestore, "savedbooks", userId))
+      .then((resource) => {
+        if (resource.exists()) {
+          setSavedBooks(resource.data().savedBooks);
         }
       })
-      .catch((err) => console.error(err));
-  }, []);
-  // second parameter of empty array means that this useEffect function will only be used one time, when the component mounts
+      .catch((error) => console.error(error));
+  }
+
+  // useEffect(() => {
+  //   //the function inside here will be called on at the end of each lifecycle (this is where i will get collection from firestore) and then call setSavedBooks and pass in the result (setSavedBooks will set the value of savedBooks)
+  //   getDoc(doc(firestore, "", "savedbook1"))
+  //     .then((res) => {
+  //       if (res.exists()) {
+  //         setSavedBooks(res.data().savedBooks);
+  //       }
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
+  // // second parameter of empty array means that this useEffect function will only be used one time, when the component mounts
 
   const handleClickSaved = (book) => {
     console.log("handle click saved from App reached");
@@ -57,23 +63,10 @@ function App() {
     // const savedBooks = [];
     const newSavedBooksCollection = savedBooks.concat(book);
     // const newSavedBooksCollection = [...savedBooks, book]
-    setSavedBooks(newSavedBooksCollection);
-    saveToSavedDb(newSavedBooksCollection);
     console.log(newSavedBooksCollection);
+    setSavedBooks(newSavedBooksCollection);
+    saveToSavedDb(userId, newSavedBooksCollection);
     console.log("click save and send to firestore")
-    // savedBooksRef.doc().set({savedBooks})
-
-    // db.collection("testsavedbook").doc("savedbook1").update({savedbooks: newSavedBooksCollection});
-
-    // console.log(data);
-    // console.log(status);
-    //this is where i would add saved book to firestore "saved" collection
-    // const savedBookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
-    // const { status, data } = useFirestoreDocData(savedBookRef);
-    // firestore.collection("testsavedbook").doc("testbook").set({
-    //   title: book.title,
-    //   author: book.author
-    // });
   }
 
   const handleClickRead = (book) => {
@@ -97,7 +90,7 @@ function App() {
   const handleLoginSuccess = (user) => {
     console.log(user);
     setUserId(user.uid);
-    // getBooksFromDb(user.uid);
+    getSavedBooksFromDb(user.uid);
   }
 
   const handleLogOutSuccess = (user) => {
