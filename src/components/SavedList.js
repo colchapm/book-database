@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { doc } from 'firebase/firestore';
-import { useFirestoreDocData,useFirestore,} from 'reactfire';
 
 function SavedList(props) {
 
   function handleMarkingRead(book) {
-    console.log("savedList handleMarkingRead function reached");
-    console.log(book);
     props.onClickRead(book);
   }
 
-  function handleRemovingSave(book) {
-    props.onClickRemoveFromSaved(book);
+  function handleRemovingBook(book) {
+    props.onClickRemoveBookFromSaved(book);
   }
 
 
@@ -34,7 +30,7 @@ function SavedList(props) {
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
             <button onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
-            <button onClick= { () => handleRemovingSave(bookData) }>Remove From Readlist</button>
+            <button onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove Book</button>
             { console.log(bookData.id) }
           </li>
         )}
@@ -45,6 +41,7 @@ function SavedList(props) {
 
 SavedList.propTypes = {
   onClickRead: PropTypes.func,
+  onClickRemoveBookFromSaved: PropTypes.func
 }
 
 export default SavedList;
