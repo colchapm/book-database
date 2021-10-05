@@ -64,18 +64,6 @@ function App() {
       .catch((error) => console.error(error));
   }
 
-  // useEffect(() => {
-  //   //the function inside here will be called on at the end of each lifecycle (this is where i will get collection from firestore) and then call setSavedBooks and pass in the result (setSavedBooks will set the value of savedBooks)
-  //   getDoc(doc(firestore, "", "savedbook1"))
-  //     .then((res) => {
-  //       if (res.exists()) {
-  //         setSavedBooks(res.data().savedBooks);
-  //       }
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, []);
-  // // second parameter of empty array means that this useEffect function will only be used one time, when the component mounts
-
   const handleClickSaved = (book) => {
     console.log("handle click saved from App reached");
     console.log(book);
@@ -98,12 +86,13 @@ function App() {
     //this is where i would add a read book to firestore "completed" collection
   }
 
-  const handleClickRemoveFromSaved = (id) => {
+  const handleRemoveBookFromSaved = (title) => {
     console.log("handle click remove saved book from App reached");
-    console.log(id);
-    const newSavedBooksCollection = savedBooks.filter(book => book.id !== id);
-    setSavedBooks(newSavedBooksCollection);
+    console.log(title)
+    const newSavedBooksCollection = savedBooks.filter(book => book.volumeInfo.title !== title);
     console.log(newSavedBooksCollection);
+    setSavedBooks(newSavedBooksCollection);
+    saveToSavedDb(userId, newSavedBooksCollection);
     //this is where i would remove a read book from firestore "saved" collection
   }
 
@@ -149,7 +138,7 @@ function App() {
             <Route path="/saved">
               <SavedList savedBooks={savedBooks}
                           onClickRead={handleClickRead} 
-                          onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
+                          onClickRemoveBookFromSaved={handleRemoveBookFromSaved}/>
             </Route>
             <Route path="/history">
               <DoneReadList completedBooks={completedBooks} />
@@ -158,7 +147,7 @@ function App() {
               { userId === null ? 
                 <Redirect to="/signin" /> :
                   <BookControl onClickSaved={handleClickSaved}
-                  onClickRead={handleClickRead} />
+                  onClickRead={handleClickRead}/>
               }
             </Route>
           </Switch>
