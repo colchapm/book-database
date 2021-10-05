@@ -5,7 +5,7 @@ function Header(){
   return (
     <React.Fragment>
       <h1>BOOKBOX</h1>
-      <ul>
+      {/* <ul>
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -15,7 +15,7 @@ function Header(){
         <li>
           <Link to="/history">History</Link>
         </li>
-      </ul>
+      </ul> */}
     </React.Fragment>
   );
 }

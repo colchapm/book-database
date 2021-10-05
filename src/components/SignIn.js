@@ -27,7 +27,7 @@ function SignIn(props) {
     <form onSubmit={handleSubmit}>
       <div>Email: <input name='email' type='text' /></div>
       <div>Password: <input name='password' type='password' /></div>
-      <button>Login</button>
+      <button>Sign In</button>
       <div><Link to='/signup'>Sign Up</Link></div>
     </form>
   );
