@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import BookControl from "./BookControl";
 import SavedList from "./SavedList";
 import DoneReadList from "./DoneReadList";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import 'firebase/firestore';
-import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp, useFirestoreCollection } from 'reactfire';
-import { doc, getFirestore, setDoc, getDoc, addDoc } from 'firebase/firestore';
+import { FirestoreProvider, useFirebaseApp } from 'reactfire';
+import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import SignOut from "./SignOut";
@@ -96,6 +96,13 @@ function App() {
     //this is where i would remove a read book from firestore "saved" collection
   }
 
+  const handleRemoveBookFromCompleted = (title) => {
+    console.log('handleRemoveBookFromCompleted on app reached');
+    const newCompletedBooksCollection = completedBooks.filter(book => book.volumeInfo.title !== title);
+    setCompletedBooks(newCompletedBooksCollection);
+    saveToCompletedDb(userId, newCompletedBooksCollection);
+  }
+
   const handleLoginSuccess = (user) => {
     console.log(user);
     setUserId(user.uid);
@@ -141,7 +148,8 @@ function App() {
                           onClickRemoveBookFromSaved={handleRemoveBookFromSaved}/>
             </Route>
             <Route path="/history">
-              <DoneReadList completedBooks={completedBooks} />
+              <DoneReadList completedBooks={completedBooks}
+                            onClickRemoveBookFromCompleted={handleRemoveBookFromCompleted} />
             </Route>
             <Route path="/">
               { userId === null ? 
