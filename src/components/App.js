@@ -3,11 +3,13 @@ import Header from "./Header";
 import BookControl from "./BookControl";
 import SavedList from "./SavedList";
 import DoneReadList from "./DoneReadList";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import 'firebase/firestore';
 import { useFirestoreDocData, useFirestore, FirestoreProvider, useFirebaseApp, useFirestoreCollection } from 'reactfire';
 import { doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
-import BurritoTaste from "./BurritoTaste";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 
 
 function App() {
@@ -27,10 +29,11 @@ function App() {
   //App component will re-render whenever setSavedBooks is called
 
   const [completedBooks, setCompletedBooks] = useState([]);
+  const [userId, setUserId] = useState(null);
 
   // const db = getFirestore();
 
-  function saveToDb(books) {
+  function saveToSavedDb(books) {
     setDoc(doc(firestore, "testsavedbook", "savedbook1"), { savedBooks: books})
       .then(() => console.log("success"))
       .catch((err) => console.error(err));
@@ -55,7 +58,7 @@ function App() {
     const newSavedBooksCollection = savedBooks.concat(book);
     // const newSavedBooksCollection = [...savedBooks, book]
     setSavedBooks(newSavedBooksCollection);
-    saveToDb(newSavedBooksCollection);
+    saveToSavedDb(newSavedBooksCollection);
     console.log(newSavedBooksCollection);
     console.log("click save and send to firestore")
     // savedBooksRef.doc().set({savedBooks})
@@ -91,27 +94,62 @@ function App() {
     //this is where i would remove a read book from firestore "saved" collection
   }
 
+  const handleLoginSuccess = (user) => {
+    console.log(user);
+    setUserId(user.uid);
+    // getBooksFromDb(user.uid);
+  }
+
+  const handleLogOutSuccess = (user) => {
+    console.log(user);
+    setUserId(null);
+    setSavedBooks([]);
+    setCompletedBooks([]);
+  }
+
+  const links = userId === null ?
+    <Link to="/singin">Sign In</Link> :
+    <>
+      <Link to="/">Home</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> | <Link to="/signout">Sign Out</Link>
+    </>
 
   return (
     <FirestoreProvider sdk={firestore}>
-      <BurritoTaste />
       <Router>
+        {links}
+        <div>
+          {userId === null ? " " : `User Id: ${userId}`}
+        </div>
         <Header />
-        <Switch>
-          <Route path="/saved">
-            <SavedList savedBooks={savedBooks}
-                        onClickRead={handleClickRead} 
-                        onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
-          </Route>
-          <Route path="/history">
-            <DoneReadList completedBooks={completedBooks} />
-          </Route>
-          <Route path="/">
-            <BookControl onClickSaved={handleClickSaved}
-                          onClickRead={handleClickRead} />
-          </Route>
-        </Switch>
-      </Router>
+        <div>
+          <Switch>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/signout">
+              <SignOut onSuccess={handleLogOutSuccess} />
+            </Route>
+            <Route path="/signin">
+              <SignIn onSuccess={handleLoginSuccess} />
+            </Route>
+            <Route path="/saved">
+              <SavedList savedBooks={savedBooks}
+                          onClickRead={handleClickRead} 
+                          onClickRemoveFromSaved={handleClickRemoveFromSaved}/>
+            </Route>
+            <Route path="/history">
+              <DoneReadList completedBooks={completedBooks} />
+            </Route>
+            <Route path="/">
+              { userId === null ? 
+                <Redirect to="/signin" /> :
+                  <BookControl onClickSaved={handleClickSaved}
+                  onClickRead={handleClickRead} />
+              }
+            </Route>
+          </Switch>
+        </div>
+        </Router>
     </FirestoreProvider>
   );
 }
