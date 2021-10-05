@@ -2,12 +2,12 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function SignUp(props) {
+function SignUp(props) {
   const history = useHistory();
 
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    const form = ev.currentTarget;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
     if (form.password.value === form.password2.value) {
       const auth = getAuth();
 
@@ -39,3 +39,5 @@ export default function SignUp(props) {
     </form>
   );
 }
+
+export default SignUp;
