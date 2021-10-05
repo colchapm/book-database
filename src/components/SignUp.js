@@ -14,16 +14,14 @@ function SignUp(props) {
       createUserWithEmailAndPassword(auth, form.email.value, form.password.value)
         .then((userCredential) => {
           // Signed in 
-          const user = userCredential.user;
+          // const user = userCredential.user;
           console.log(userCredential);
           history.push('/');
-          // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
           console.log(error);
-          // ..
         });
     } else {
       alert("Passwords don't match");

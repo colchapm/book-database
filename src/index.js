@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { FirebaseAppProvider, FirestoreProvider, useFirestoreDocData, useFirestore, useFirebaseApp } from 'reactfire';
-import { doc, getFirestore } from 'firebase/firestore';
+import { FirebaseAppProvider } from 'reactfire';
+
 
 
 
