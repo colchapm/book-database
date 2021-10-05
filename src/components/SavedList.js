@@ -5,10 +5,6 @@ import { useFirestoreDocData,useFirestore,} from 'reactfire';
 
 function SavedList(props) {
 
-
-  const bookRef = doc(useFirestore(), 'testsavedbook', 'savedbook1');
-  const { data } = useFirestoreDocData(bookRef);
-
   function handleMarkingRead(book) {
     console.log("savedList handleMarkingRead function reached");
     console.log(book);
@@ -43,10 +39,6 @@ function SavedList(props) {
           </li>
         )}
       </ul>
-      {/* {data.savedbooks.map((bookData) => 
-        <p>Title: {bookData}</p>
-        )
-      } */}
     </>
   );
 }
