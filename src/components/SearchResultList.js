@@ -29,8 +29,8 @@ function SearchResultList(props){
               ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
-            <button onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
-            <button onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
+            <button className="book_button" onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
+            <button className="book_button" onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
             { console.log(bookData.id) }
           </li>
         )}
