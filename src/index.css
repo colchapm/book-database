@@ -11,6 +11,11 @@
   display: block;
 }
 
+.header_page {
+  background-color: lightgrey;
+
+}
+
 .top_link1 {
   position: absolute;
   top: 10px;
@@ -21,6 +26,12 @@
   position: absolute;
   top: 10px;
   right: 100px;
+}
+
+.sign_out {
+  position: absolute;
+  top: 10px;
+  right: 40px;
 }
 
 .header_subtext {
@@ -34,5 +45,51 @@
   margin: 10px; */
   box-sizing: border-box;
   display: block;
+
+}
+
+.photo {
+  width: 60%;
+  height: 400%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.border {
+  background-color:darkred;
+}
+
+.button {
+  background-color: darkslateblue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: auto;
+  cursor: pointer;
+}
+
+
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.book_button {
+  background-color: white;
+  color: black;
+  border: 2px solid slateblue;
+}
+
+.book_button:focus {
+  background-color: slateblue;
+  color: white;
+  border: 2px solid black;
 
 }

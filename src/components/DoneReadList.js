@@ -20,7 +20,7 @@ function DoneReadList(props) {
               ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/>
 
-            <button onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove</button>
+            <button className="book_button" onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove</button>
           </li>
         )}
       </ul>

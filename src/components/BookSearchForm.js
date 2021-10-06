@@ -9,14 +9,15 @@ function BookSearchForm(props) {
   }
   return (
     <React.Fragment>
-      <form onSubmit={submitSearch}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Enter Book title" />
-
-          <button type="submit">Search</button>
-      </form>
+      <div className="border">
+        <form onSubmit={submitSearch}>
+          <input
+            type="text"
+            name="title"
+            placeholder="enter book title" />
+            <button className="button" type="submit">Search</button>
+        </form>
+      </div>
     </React.Fragment>
   )
 }
