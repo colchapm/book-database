@@ -118,7 +118,7 @@ function App() {
   }
 
   const links = userId === null ?
-    <Link to="/singin">Sign In</Link> :
+    <Link to="/">Home</Link> :
     <>
       <Link to="/">Home</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> | <Link to="/signout">Sign Out</Link>
     </>
