@@ -120,16 +120,13 @@ function App() {
   const links = userId === null ?
     <Link to="/">Home</Link> :
     <>
-      <Link to="/">Home</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> | <Link to="/signout">Sign Out</Link>
+      <Link to="/">Home</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> <Link className="sign_out" to="/signout">Sign Out</Link>
     </>
 
   return (
     <FirestoreProvider sdk={firestore}>
       <Router>
-        {links}
-        <div>
-          {userId === null ? " " : `User Id: ${userId}`}
-        </div>
+        {links} 
         <Header />
         <div>
           <Switch>
