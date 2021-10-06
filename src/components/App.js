@@ -27,22 +27,18 @@ function App() {
   const [userId, setUserId] = useState(null);
 
   function saveToSavedDb(userId, books) {
-    console.log("saveToSavedDb fnction reached");
     setDoc(doc(firestore, "savedbooks", userId), { savedBooks: books})
       .then(() => console.log("success"))
       .catch((err) => console.error(err));
   }
 
   function saveToCompletedDb(userId, books) {
-    console.log("saveToCompletdDb fnction reached");
     setDoc(doc(firestore, "completedbooks", userId), { completedBooks: books})
       .then(() => console.log("success"))
       .catch((err) => console.error(err));
   }
 
   const getSavedBooksFromDb = (userId) => {
-    console.log("getSavedBooksFromDb function reached")
-    console.log(userId);
     getDoc(doc(firestore, "savedbooks", userId))
       .then((resource) => {
         if (resource.exists()) {
@@ -53,8 +49,6 @@ function App() {
   }
 
   const getCompletedBooksFromDb = (userId) => {
-    console.log("getCompletedBooksFromDb function reached")
-    console.log(userId);
     getDoc(doc(firestore, "completedbooks", userId))
       .then((resource) => {
         if (resource.exists()) {
@@ -65,39 +59,24 @@ function App() {
   }
 
   const handleClickSaved = (book) => {
-    console.log("handle click saved from App reached");
-    console.log(book);
-    // const savedBooks = [];
     const newSavedBooksCollection = savedBooks.concat(book);
-    // const newSavedBooksCollection = [...savedBooks, book]
-    console.log(newSavedBooksCollection);
     setSavedBooks(newSavedBooksCollection);
     saveToSavedDb(userId, newSavedBooksCollection);
-    console.log("click save and send to firestore")
   }
 
   const handleClickRead = (book) => {
-    console.log("handle click as read from App reached");
-    console.log(book);
     const newCompletedBooksCollection = completedBooks.concat(book);
     setCompletedBooks(newCompletedBooksCollection);
-    console.log(newCompletedBooksCollection);
     saveToCompletedDb(userId, newCompletedBooksCollection);
-    //this is where i would add a read book to firestore "completed" collection
   }
 
   const handleRemoveBookFromSaved = (title) => {
-    console.log("handle click remove saved book from App reached");
-    console.log(title)
     const newSavedBooksCollection = savedBooks.filter(book => book.volumeInfo.title !== title);
-    console.log(newSavedBooksCollection);
     setSavedBooks(newSavedBooksCollection);
     saveToSavedDb(userId, newSavedBooksCollection);
-    //this is where i would remove a read book from firestore "saved" collection
   }
 
   const handleRemoveBookFromCompleted = (title) => {
-    console.log('handleRemoveBookFromCompleted on app reached');
     const newCompletedBooksCollection = completedBooks.filter(book => book.volumeInfo.title !== title);
     setCompletedBooks(newCompletedBooksCollection);
     saveToCompletedDb(userId, newCompletedBooksCollection);

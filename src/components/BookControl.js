@@ -39,14 +39,6 @@ class BookControl extends React.Component {
     this.makeGoogleApiCall(title);
   }
 
-  // handleSavingBook = (book) => {
-  //   console.log("handlesaving controller book function reached");
-  //   console.log(book);
-  //   const newSavedBooksCollection = this.state.savedBooks.concat(book);
-  //   this.setState({savedBooks: newSavedBooksCollection});
-  //   //this is where i would add book to firestore "saved" collection
-  // }
-
 
   render() {
     console.log(this.state)
@@ -58,17 +50,13 @@ class BookControl extends React.Component {
                                   onSavingBook = {this.props.onClickSaved}
                                   onMarkingBookAsRead={this.props.onClickRead}/>
     }
-
-
-    
-      return (
-        <React.Fragment>
-          <BookSearchForm onTitleSearch={this.handleSearch} />
-          {results}
-        </React.Fragment>
-      )
+    return (
+      <React.Fragment>
+        <BookSearchForm onTitleSearch={this.handleSearch} />
+        {results}
+      </React.Fragment>
+    )
   }  
 }
-
 
 export default BookControl
