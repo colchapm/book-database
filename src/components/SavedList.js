@@ -26,7 +26,7 @@ function SavedList(props) {
               : bookData.volumeInfo.averageRating} </p>
           
               <a style={{display: "table-cell"}} href={bookData.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer"> <img src={bookData.volumeInfo.imageLinks === undefined
-              ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
+              ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXhzNKj_YNwD8fENvC1wGMxq6_zUxI1FmLvQ&usqp=CAU"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/> </a>
 
             <button className="book_button" onClick= { () => { handleMarkingRead(bookData); handleRemovingBook(bookData.volumeInfo.title); }}>Mark As Read</button>

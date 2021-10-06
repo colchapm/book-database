@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import noImageAvailable from "./../img/no_image_available.jpg"
 
 
 function SearchResultList(props){
@@ -24,10 +25,10 @@ function SearchResultList(props){
             <p>Average Rating: {bookData.volumeInfo.averageRating === undefined
               ? "No Ratings Available"
               : bookData.volumeInfo.averageRating} </p>
-          
             <a style={{display: "table-cell"}} href={bookData.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer"> <img src={bookData.volumeInfo.imageLinks === undefined
-              ? "https://previews.123rf.com/images/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-no-image-available-icon-flat-vector.jpg"
+              ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXhzNKj_YNwD8fENvC1wGMxq6_zUxI1FmLvQ&usqp=CAU"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/> </a>
+
 
             <button className="book_button" onClick= { () => handleSavingBook(bookData) }>Add To Readlist</button>
             <button className="book_button" onClick= { () => handleMarkingRead(bookData) }>Mark As Read</button>
