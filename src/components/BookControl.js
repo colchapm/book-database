@@ -34,7 +34,6 @@ class BookControl extends React.Component {
   }
 
   handleSearch = (title) => {
-    console.log(title);
     this.setState({ title });
     this.makeGoogleApiCall(title);
   }
