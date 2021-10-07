@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import tempCoverPhoto from "./../img/temporary_cover_photo.jpg"
 
 function Header(){
