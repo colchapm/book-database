@@ -32,9 +32,10 @@ function SavedList(props) {
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/> </a>
             </div>
 
-            <button className="book_button" onClick= { () => { handleMarkingRead(bookData); handleRemovingBook(bookData.volumeInfo.title); }}>Mark As Read</button>
-            <button className="book_button" onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove</button>
-            { console.log(bookData.id) }
+            <div className="thumbnail">
+              <button className="book_button" onClick= { () => { handleMarkingRead(bookData); handleRemovingBook(bookData.volumeInfo.title); }}>Mark As Read</button>
+              <button className="book_button" onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove</button>
+            </div>
           </li>
         )}
       </ul>
