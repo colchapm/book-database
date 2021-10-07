@@ -14,23 +14,26 @@ function SavedList(props) {
 
   return (
     <>
-    <h1>Saved Books</h1>
-      <ul>
+    <hr />
+    <p className="header_subtext">Saved Books</p> 
+      <ul className="container">
         {props.savedBooks.map((bookData, index) =>
-          <li key={index}>
-            <p>{bookData.volumeInfo.title}</p>
-            <p>Author(s): {bookData.volumeInfo.authors}</p>
-            <p>Genre: {bookData.volumeInfo.categories}</p>
-            <p>Average Rating: {bookData.volumeInfo.averageRating === undefined
+          <li className="li_no_bullets" key={index}>
+            <p className="book_title_text">{bookData.volumeInfo.title}</p>
+            <p className="book_author_text">Author(s): {bookData.volumeInfo.authors}</p>
+            {/* <p>Genre: {bookData.volumeInfo.categories}</p> */}
+            {/* <p>Average Rating: {bookData.volumeInfo.averageRating === undefined
               ? "No Ratings Available"
-              : bookData.volumeInfo.averageRating} </p>
+              : bookData.volumeInfo.averageRating} </p> */}
           
+            <div className="thumbnail">
               <a style={{display: "table-cell"}} href={bookData.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer"> <img src={bookData.volumeInfo.imageLinks === undefined
               ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXhzNKj_YNwD8fENvC1wGMxq6_zUxI1FmLvQ&usqp=CAU"
               : bookData.volumeInfo.imageLinks.thumbnail} alt="book cover thumbnail"/> </a>
+            </div>
 
             <button className="book_button" onClick= { () => { handleMarkingRead(bookData); handleRemovingBook(bookData.volumeInfo.title); }}>Mark As Read</button>
-            <button className="book_button" onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove Book</button>
+            <button className="book_button" onClick= { () => handleRemovingBook(bookData.volumeInfo.title) }>Remove</button>
             { console.log(bookData.id) }
           </li>
         )}
