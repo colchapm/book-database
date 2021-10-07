@@ -115,6 +115,7 @@ input[type=text] {
   padding-bottom: 20px;
 }
 
+
 .book_title_text {
   font-weight: bold;
   font-size: 15px;
@@ -136,3 +137,21 @@ input[type=text] {
   width: 50%;
   text-align: center;
 }
+
+.search_li_no_bullets {
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
+} 
+
+.search_book_title_text {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.search_book_author_text {
+  font-weight: normal;
+  font-size: 14px;
+  margin: 0
+} 
+

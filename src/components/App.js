@@ -30,6 +30,7 @@ function App() {
     setDoc(doc(firestore, "savedbooks", userId), { savedBooks: books})
       .then(() => console.log("success"))
       .catch((err) => console.error(err));
+    
   }
 
   function saveToCompletedDb(userId, books) {
@@ -96,10 +97,11 @@ function App() {
     setCompletedBooks([]);
   }
 
+
   const links = userId === null ?
-    <Link to="/">Home</Link> :
+    <Link to="/">Search</Link> :
     <>
-      <Link to="/">Home</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> <Link className="sign_out" to="/signout">Sign Out</Link>
+      <Link to="/">Search</Link> | <Link to="/saved">Saved</Link> | <Link to="/history">History</Link> <Link className="sign_out" to="/signout">Sign Out</Link>
     </>
 
   return (
