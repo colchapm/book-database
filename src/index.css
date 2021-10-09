@@ -11,10 +11,10 @@
   display: block;
 }
 
-.header_page {
+/* .header_page {
   background-color: lightgrey;
 
-}
+} */
 
 .top_link1 {
   position: absolute;
@@ -34,17 +34,43 @@
   right: 40px;
 }
 
-.header_subtext {
+.header_subtext1 {
   text-align: center;
   font-size: 7;
   font-weight: 600;
   /* letter-spacing: 1px;
   line-height: 1.15; */
   font-family: 'Courier New', Courier, monospace;
-  /* padding: 13px;
-  margin: 10px; */
   box-sizing: border-box;
   display: block;
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 75%; /* Adjust this value to move the positioned div up and down */
+  /* width: 60%; Set the width of the positioned div */
+
+
+}
+
+.header_subtext2 {
+  text-align: center;
+  font-size: 7;
+  font-weight: 600;
+  /* letter-spacing: 1px;
+  line-height: 1.15; */
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  z-index: 999;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 78%; /* Adjust this value to move the positioned div up and down */
+  /* width: 60%; Set the width of the positioned div */
+
 
 }
 
