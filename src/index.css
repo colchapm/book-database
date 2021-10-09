@@ -71,6 +71,18 @@
   top: 78%; /* Adjust this value to move the positioned div up and down */
   /* width: 60%; Set the width of the positioned div */
 
+}
+
+
+.header_subtext {
+  text-align: center;
+  font-size: 7;
+  font-weight: 600;
+  /* letter-spacing: 1px;
+  line-height: 1.15; */
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+  display: block;
 
 }
 
