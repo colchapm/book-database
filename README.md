@@ -5,7 +5,7 @@
 <img src="./src/img/bookboxlogo2.png" alt="bookbox logo" height="382px">
 </p>
 
-<p>This React application makes Google Books API calls and allows users to tracks books they have read and save those they want to read. Stores documents to NoSQL database, Firebase.</p>
+<p>This React application makes Google Books API calls and allows users to track books they have read and save those they want to read. Stores documents to NoSQL database, Firebase.</p>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
